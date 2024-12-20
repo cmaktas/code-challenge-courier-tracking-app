@@ -69,7 +69,7 @@ public class CourierGeolocationConsumer {
     private void processDistanceUpdates(Courier courier, CourierGeolocation geolocation) {
         double[] lastLocation = cacheService.getLastKnownLocation(courier.getId());
         if (!ObjectUtils.isEmpty(lastLocation)) {
-            double dist = HaversineDistanceCalculator.calculateDistance(
+            double dist = HaversineDistanceCalculator.calculateDistanceInMeters(
                     lastLocation[0], lastLocation[1],
                     geolocation.getLat(), geolocation.getLng()
             );
@@ -94,7 +94,7 @@ public class CourierGeolocationConsumer {
      * Determines if the courier is within 100m of a store.
      */
     private boolean isCourierWithinStoreRadius(Store store, CourierGeolocation geolocation) {
-        double dist = HaversineDistanceCalculator.calculateDistance(
+        double dist = HaversineDistanceCalculator.calculateDistanceInMeters(
                 store.getLat(), store.getLng(),
                 geolocation.getLat(), geolocation.getLng()
         );
