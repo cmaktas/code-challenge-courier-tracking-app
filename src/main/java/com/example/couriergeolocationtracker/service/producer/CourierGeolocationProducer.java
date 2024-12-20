@@ -5,7 +5,6 @@ import com.example.couriergeolocationtracker.domain.dtos.CourierGeolocation;
 import com.example.couriergeolocationtracker.domain.entities.Store;
 import com.example.couriergeolocationtracker.infrastructure.cache.StoreCache;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -30,7 +29,7 @@ public class CourierGeolocationProducer {
     private final ObjectMapper objectMapper;
     private final StoreCache storeCache;
 
-    @Value("${courier.producer.max-courier-id}")
+    @Value("${courier-app.producer.max-courier-id}")
     private int maxCourierId;
 
     private final Random random = new Random();
@@ -41,7 +40,7 @@ public class CourierGeolocationProducer {
      * Periodically generates and sends courier geolocation messages to the queue.
      * The rate is defined in the application.yml configuration.
      */
-    @Scheduled(fixedRateString = "${courier.producer.rate-ms}")
+    @Scheduled(fixedRateString = "${courier-app.producer.rate-ms}")
     public void sendCourierGeolocation() {
         if (!initializeStoresIfNeeded()) {
             // If stores aren't loaded yet, skip this round.

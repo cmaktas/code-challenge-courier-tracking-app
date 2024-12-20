@@ -13,7 +13,7 @@ import java.math.BigDecimal;
 @Configuration
 public class SwaggerConfiguration {
 
-    @Value("${courier.producer.max-courier-id}")
+    @Value("${courier-app.producer.max-courier-id}")
     private int maxCourierId;
 
     @Bean

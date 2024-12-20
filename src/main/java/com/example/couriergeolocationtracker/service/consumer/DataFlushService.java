@@ -4,7 +4,6 @@ import com.example.couriergeolocationtracker.domain.entities.Courier;
 import com.example.couriergeolocationtracker.infrastructure.repository.CourierRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
@@ -27,7 +26,7 @@ public class DataFlushService {
      * Periodically flushes the cached distances to the database.
      * Logs how many couriers were updated for reporting purposes.
      */
-    @Scheduled(fixedRateString = "${courier.data-flush.rate-ms}")
+    @Scheduled(fixedRateString = "${courier-app.data-flush.rate-ms}")
     public void flushCacheToDB() {
         log.info("Starting flushCacheToDB process...");
         List<Courier> couriers = courierRepository.findAll();
