@@ -2,6 +2,8 @@ package com.example.couriergeolocationtracker.service.consumer;
 
 import com.example.couriergeolocationtracker.domain.entities.Courier;
 import com.example.couriergeolocationtracker.infrastructure.repository.CourierRepository;
+import com.example.couriergeolocationtracker.service.distance.strategy.DistanceUnitStrategy;
+import com.example.couriergeolocationtracker.service.distance.strategy.DistanceUnitStrategyFactory;
 import com.example.couriergeolocationtracker.web.model.v1.response.CourierDistanceResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
