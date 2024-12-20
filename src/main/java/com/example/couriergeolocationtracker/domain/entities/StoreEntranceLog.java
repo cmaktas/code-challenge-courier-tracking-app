@@ -1,6 +1,7 @@
 package com.example.couriergeolocationtracker.domain.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.time.Instant;
@@ -19,7 +20,15 @@ public class StoreEntranceLog {
     @EqualsAndHashCode.Include
     private Long id;
 
+    @NotNull
+    @Column(nullable = false)
     private Long courierId;
+
+    @NotNull
+    @Column(nullable = false)
     private String storeName;
+
+    @NotNull
+    @Column(nullable = false)
     private Instant entryTime;
 }
