@@ -13,7 +13,7 @@ docker build -t courier-geolocation-tracker . && docker run --rm -d -p 8080:8080
 ```
 Stop and remove project related Docker components:
 ```bash
-docker build -t courier-geolocation-tracker . && docker run --rm -d -p 8080:8080 --name courier-app courier-geolocation-tracker
+docker rm -f courier-app && docker rmi courier-geolocation-tracker
 ```
 
 ## Configuring Application
