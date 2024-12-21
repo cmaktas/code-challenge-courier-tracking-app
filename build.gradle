@@ -44,3 +44,24 @@ dependencies {
 tasks.named('test') {
 	useJUnitPlatform()
 }
+
+tasks.javadoc {
+	dependsOn classes
+	options.addStringOption('Xdoclint:none', '-quiet')
+	failOnError = false
+	options.docTitle = 'Courier Geolocation Tracker Java Documentation'
+	options.windowTitle = 'Courier Geolocation Tracker Java Documentation'
+}
+
+tasks.register('copyJavadocsToResources', Copy) {
+	dependsOn tasks.javadoc
+	from(layout.buildDirectory.dir("docs/javadoc"))
+	into(layout.projectDirectory.dir("src/main/resources/static/docs"))
+}
+
+tasks.bootJar {
+	dependsOn copyJavadocsToResources
+}
+
+
+
