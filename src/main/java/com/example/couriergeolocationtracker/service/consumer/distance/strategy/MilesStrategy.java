@@ -1,4 +1,4 @@
-package com.example.couriergeolocationtracker.service.distance.strategy;
+package com.example.couriergeolocationtracker.service.consumer.distance.strategy;
 
 import org.springframework.stereotype.Component;
 
