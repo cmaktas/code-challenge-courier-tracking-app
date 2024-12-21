@@ -8,8 +8,8 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @SpringBootApplication
 public class CourierGeolocationTrackerApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(CourierGeolocationTrackerApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(CourierGeolocationTrackerApplication.class, args);
+    }
 
 }

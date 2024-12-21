@@ -12,9 +12,9 @@ public class HaversineDistanceCalculator {
     /**
      * Calculates the distance between two geographic coordinates in meters.
      *
-     * @param latitude1 Latitude of the first coordinate in decimal degrees.
+     * @param latitude1  Latitude of the first coordinate in decimal degrees.
      * @param longitude1 Longitude of the first coordinate in decimal degrees.
-     * @param latitude2 Latitude of the second coordinate in decimal degrees.
+     * @param latitude2  Latitude of the second coordinate in decimal degrees.
      * @param longitude2 Longitude of the second coordinate in decimal degrees.
      * @return The distance in meters.
      */

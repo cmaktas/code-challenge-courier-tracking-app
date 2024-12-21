@@ -31,4 +31,5 @@ public class StoreEntranceLog {
     @NotNull
     @Column(nullable = false)
     private Instant entryTime;
+
 }

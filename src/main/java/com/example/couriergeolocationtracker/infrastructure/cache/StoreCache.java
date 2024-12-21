@@ -5,9 +5,9 @@ import com.example.couriergeolocationtracker.infrastructure.repository.StoreRepo
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
-import org.springframework.boot.context.event.ApplicationReadyEvent;
 
 import java.util.List;
 

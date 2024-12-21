@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
 
-
 /**
  * Service responsible for periodically flushing cached courier distances into the database.
  * Ensures the totalDistance field is kept in sync with the cached distances.
