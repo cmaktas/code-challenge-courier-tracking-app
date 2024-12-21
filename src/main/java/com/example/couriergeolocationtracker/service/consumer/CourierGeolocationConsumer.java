@@ -15,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
 
 import java.time.Instant;
@@ -42,6 +43,7 @@ public class CourierGeolocationConsumer {
      * @param message JSON string representing a CourierGeolocation
      * @throws JsonProcessingException if message cannot be parsed
      */
+    @Transactional
     @JmsListener(destination = ActiveMQConstants.QUEUE_NAME)
     public void consumeGeolocation(String message) throws JsonProcessingException {
         log.debug("Courier geolocation received from queue: {}", message);

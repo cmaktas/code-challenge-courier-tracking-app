@@ -25,13 +25,12 @@ spring:
       enabled: true
 
 courier-app:
+  max-number-of-courier-entities: 5 # Number of couriers that producer will use
   producer:
     rate-ms: 500 # Geolocation produce rate in MS
-    max-courier-id: 5 # Number of couriers that producer will use
   data-flush:
     rate-ms: 60000 # Data flush from caffeine cache to h2 database in MS
   cache:
-    maximum-size: 1000 # Maximum number of cache entries
     expire-duration-minutes: 60 # Expiration duration in minutes for cache entries
 
 logging:

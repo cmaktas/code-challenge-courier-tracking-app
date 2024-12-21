@@ -29,7 +29,7 @@ public class CourierGeolocationProducer {
     private final ObjectMapper objectMapper;
     private final StoreCache storeCache;
 
-    @Value("${courier-app.producer.max-courier-id}")
+    @Value("${courier-app.max-number-of-courier-entities}")
     private int maxCourierId;
 
     private final Random random = new Random();

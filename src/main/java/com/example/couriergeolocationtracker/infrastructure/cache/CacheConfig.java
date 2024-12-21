@@ -15,7 +15,7 @@ import java.time.Duration;
 @Configuration
 public class CacheConfig {
 
-    @Value("${courier-app.cache.maximum-size}")
+    @Value("${courier-app.max-number-of-courier-entities}")
     private int maximumSize;
 
     @Value("${courier-app.cache.expire-duration-minutes}")
