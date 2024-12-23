@@ -25,7 +25,7 @@ public class CourierCacheService {
     public void updateLastKnownLocation(Long courierId, double lat, double lng) {
         Cache cache = cacheManager.getCache("lastLocations");
         if (!ObjectUtils.isEmpty(cache)) {
-            cache.put(courierId, new double[]{lat, lng});
+            cache.put(courierId, new double[] {lat, lng});
         }
     }
 
@@ -50,7 +50,9 @@ public class CourierCacheService {
         Cache cache = cacheManager.getCache("accumulatedDistances");
         if (!ObjectUtils.isEmpty(cache)) {
             Double current = cache.get(courierId, Double.class);
-            if (ObjectUtils.isEmpty(current)) current = 0.0;
+            if (ObjectUtils.isEmpty(current)) {
+                current = 0.0;
+            }
             cache.put(courierId, current + distanceToAdd);
         }
     }

@@ -27,9 +27,9 @@ spring:
       enabled: true
 
 courier-app:
-  max-number-of-courier-entities: 5 # Number of couriers that producer will use
+  max-number-of-courier-entities: 7 # Number of couriers that producer will use
   producer:
-    rate-ms: 500 # Geolocation produce rate in MS
+    rate-ms: 50 # Geolocation produce rate in MS
   data-flush:
     rate-ms: 60000 # Data flush from caffeine cache to h2 database in MS
   cache:

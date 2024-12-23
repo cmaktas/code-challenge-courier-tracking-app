@@ -30,40 +30,34 @@ public class CourierController {
      * @return CourierDistanceResponse containing the distance and the chosen unit
      */
     @Operation(
-            summary = "Retrieve courier total travel distance",
-            description = "Returns the total travel distance of a courier, converted to the specified unit (km or miles).",
-            parameters = {
-                    @Parameter(
-                            name = "courierId",
-                            required = true,
-                            in = ParameterIn.PATH
-                    ),
-                    @Parameter(
-                            name = "unit",
-                            description = "Unit for the distance (km or mi)",
-                            required = true,
-                            in = ParameterIn.QUERY,
-                            schema = @Schema(type = "string", allowableValues = {"km", "mi"}, defaultValue = "km"),
-                            examples = {
-                                    @ExampleObject(value = "km", description = "Distance in kilometers"),
-                                    @ExampleObject(value = "mi", description = "Distance in miles")
-                            }
-                    )
-            },
-            responses = {
-                    @ApiResponse(
-                            responseCode = "200",
-                            description = "Successfully retrieved courier distance",
-                            content = @Content(
-                                    schema = @Schema(implementation = CourierDistanceResponse.class)
-                            )
-                    )
-            }
-    )
+        summary = "Retrieve courier total travel distance",
+        description = "Returns the total travel distance of a courier, converted to the specified unit (km or miles).",
+        parameters = {
+            @Parameter(
+                name = "courierId",
+                required = true,
+                in = ParameterIn.PATH),
+            @Parameter(
+                name = "unit",
+                description = "Unit for the distance (km or mi)",
+                required = true,
+                in = ParameterIn.QUERY,
+                schema = @Schema(type = "string", allowableValues = {"km", "mi"}, defaultValue = "km"),
+                examples = {
+                    @ExampleObject(value = "km", description = "Distance in kilometers"),
+                    @ExampleObject(value = "mi", description = "Distance in miles")
+                })},
+        responses = {
+            @ApiResponse(
+                responseCode = "200",
+                description = "Successfully retrieved courier distance",
+                content = @Content(
+                    schema = @Schema(implementation = CourierDistanceResponse.class)
+                ))})
     @GetMapping("/{courierId}/distance")
     public CourierDistanceResponse getTotalTravelDistance(
-            @PathVariable Long courierId,
-            @RequestParam(defaultValue = "km") String unit) {
+        @PathVariable Long courierId,
+        @RequestParam(defaultValue = "km") String unit) {
         return courierService.getTotalTravelDistance(courierId, unit);
     }
 }

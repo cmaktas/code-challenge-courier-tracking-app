@@ -1,4 +1,4 @@
-package com.example.couriergeolocationtracker.service.consumer.distance.strategy;
+package com.example.couriergeolocationtracker.service.consumer.strategy;
 
 /**
  * Interface defining a strategy for converting distances from meters

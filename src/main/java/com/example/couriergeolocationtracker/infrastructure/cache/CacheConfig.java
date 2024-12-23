@@ -30,8 +30,8 @@ public class CacheConfig {
     public CacheManager cacheManager() {
         CaffeineCacheManager manager = new CaffeineCacheManager("lastLocations", "accumulatedDistances", "lastStoreEntrances");
         manager.setCaffeine(Caffeine.newBuilder()
-                .maximumSize(maximumSize)
-                .expireAfterWrite(Duration.ofMinutes(expireDurationMinutes)));
+            .maximumSize(maximumSize)
+            .expireAfterWrite(Duration.ofMinutes(expireDurationMinutes)));
         return manager;
     }
 }

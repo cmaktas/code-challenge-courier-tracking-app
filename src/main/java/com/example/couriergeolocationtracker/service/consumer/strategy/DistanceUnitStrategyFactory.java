@@ -1,4 +1,4 @@
-package com.example.couriergeolocationtracker.service.consumer.distance.strategy;
+package com.example.couriergeolocationtracker.service.consumer.strategy;
 
 import org.springframework.stereotype.Component;
 
@@ -15,8 +15,8 @@ public class DistanceUnitStrategyFactory {
 
     public DistanceUnitStrategyFactory(KilometersStrategy kmStrategy, MilesStrategy milesStrategy) {
         this.strategies = Map.of(
-                "km", kmStrategy,
-                "mi", milesStrategy
+            "km", kmStrategy,
+            "mi", milesStrategy
         );
     }
 

@@ -27,11 +27,11 @@ public class SwaggerConfiguration {
     @Bean
     public OpenAPI customOpenAPI() {
         return new OpenAPI()
-                .info(new Info()
-                        .title("Courier Tracking System API")
-                        .version("1.0")
-                        .description("API documentation for the Courier Tracking System")
-                );
+            .info(new Info()
+                .title("Courier Tracking System API")
+                .version("1.0")
+                .description("API documentation for the Courier Tracking System")
+            );
     }
 
     /**
@@ -42,17 +42,17 @@ public class SwaggerConfiguration {
     @Bean
     public OpenApiCustomizer customizeMaxCourierId() {
         return openApi -> openApi.getPaths()
-                .values()
-                .stream()
-                .flatMap(pathItem -> pathItem.readOperations().stream())
-                .flatMap(operation -> operation.getParameters().stream())
-                .filter(parameter -> "courierId".equals(parameter.getName()))
-                .forEach(parameter -> {
-                    parameter.description("ID of the courier whose distance needs to be retrieved. Must be between 1 and the value of max-courier-id in application.yml. Current max-courier-id: " + maxCourierId + ".");
-                    parameter.setSchema(new IntegerSchema()
-                            .example(1)
-                            .minimum(BigDecimal.ONE)
-                            .maximum(BigDecimal.valueOf(maxCourierId)));
-                });
+            .values()
+            .stream()
+            .flatMap(pathItem -> pathItem.readOperations().stream())
+            .flatMap(operation -> operation.getParameters().stream())
+            .filter(parameter -> "courierId".equals(parameter.getName()))
+            .forEach(parameter -> {
+                parameter.description("ID of the courier whose distance needs to be retrieved. Must be between 1 and the value of max-courier-id in application.yml. Current max-courier-id: " + maxCourierId + ".");
+                parameter.setSchema(new IntegerSchema()
+                    .example(1)
+                    .minimum(BigDecimal.ONE)
+                    .maximum(BigDecimal.valueOf(maxCourierId)));
+            });
     }
 }

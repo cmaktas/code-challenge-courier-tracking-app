@@ -2,8 +2,8 @@ package com.example.couriergeolocationtracker.service.consumer;
 
 import com.example.couriergeolocationtracker.domain.entities.Courier;
 import com.example.couriergeolocationtracker.infrastructure.repository.CourierRepository;
-import com.example.couriergeolocationtracker.service.consumer.distance.strategy.DistanceUnitStrategy;
-import com.example.couriergeolocationtracker.service.consumer.distance.strategy.DistanceUnitStrategyFactory;
+import com.example.couriergeolocationtracker.service.consumer.strategy.DistanceUnitStrategy;
+import com.example.couriergeolocationtracker.service.consumer.strategy.DistanceUnitStrategyFactory;
 import com.example.couriergeolocationtracker.web.model.v1.response.CourierDistanceResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -32,7 +32,7 @@ public class CourierService {
         dataFlushService.flushCacheToDB();
 
         Courier courier = courierRepository.findById(courierId)
-                .orElseThrow(() -> new IllegalArgumentException("Courier not found"));
+            .orElseThrow(() -> new IllegalArgumentException("Courier not found"));
 
         double distanceInMeters = courier.getTotalDistance();
         DistanceUnitStrategy strategy = strategyFactory.getStrategy(unit);
@@ -42,12 +42,12 @@ public class CourierService {
         convertedDistance = Math.round(convertedDistance * 100.0) / 100.0;
 
         return CourierDistanceResponse.builder()
-                .courierId(courier.getId())
-                .totalDistance(CourierDistanceResponse.Distance.builder()
-                        .value(convertedDistance)
-                        .unit(strategy.getUnitName())
-                        .build())
-                .build();
+            .courierId(courier.getId())
+            .totalDistance(CourierDistanceResponse.Distance.builder()
+                .value(convertedDistance)
+                .unit(strategy.getUnitName())
+                .build())
+            .build();
     }
 
 }

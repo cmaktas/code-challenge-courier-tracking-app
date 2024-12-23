@@ -43,7 +43,6 @@ public class CourierGeolocationProducer {
     @Scheduled(fixedRateString = "${courier-app.producer.rate-ms}")
     public void sendCourierGeolocation() {
         if (!initializeStoresIfNeeded()) {
-            // If stores aren't loaded yet, skip this round.
             return;
         }
 
@@ -99,10 +98,10 @@ public class CourierGeolocationProducer {
         double lngOffset = (random.nextDouble() - 0.5) * 0.036;
 
         return CourierGeolocation.builder()
-                .courierId((long) (random.nextInt(maxCourierId) + 1))
-                .lat(store.getLat() + latOffset)
-                .lng(store.getLng() + lngOffset)
-                .timestamp(Instant.now())
-                .build();
+            .courierId((long) (random.nextInt(maxCourierId) + 1))
+            .lat(store.getLat() + latOffset)
+            .lng(store.getLng() + lngOffset)
+            .timestamp(Instant.now())
+            .build();
     }
 }

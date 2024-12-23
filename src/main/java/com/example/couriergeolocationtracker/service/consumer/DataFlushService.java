@@ -31,8 +31,8 @@ public class DataFlushService {
         log.debug("Starting flushCacheToDB process...");
 
         int updatedCount = courierRepository.findAll().stream()
-                .mapToInt(courier -> updateDistanceIfStale(courier) ? 1 : 0)
-                .sum();
+            .mapToInt(courier -> updateDistanceIfStale(courier) ? 1 : 0)
+            .sum();
 
         log.info("Completed flushCacheToDB process. {} courier(s) updated.", updatedCount);
     }
@@ -48,14 +48,14 @@ public class DataFlushService {
         Double cachedDistance = cacheService.getAccumulatedDistance(courier.getId());
         if (!ObjectUtils.isEmpty(cachedDistance) && cachedDistance > courier.getTotalDistance()) {
             log.debug("Updating courier [{}] totalDistance from {} to {}",
-                    courier.getId(), courier.getTotalDistance(), cachedDistance);
+                courier.getId(), courier.getTotalDistance(), cachedDistance);
             courier.setTotalDistance(cachedDistance);
             courierRepository.save(courier);
 
             return true;
         }
         log.trace("No update required for courier [{}]. Current totalDistance: {}, cachedDistance: {}",
-                courier.getId(), courier.getTotalDistance(), cachedDistance);
+            courier.getId(), courier.getTotalDistance(), cachedDistance);
         return false;
     }
 }
