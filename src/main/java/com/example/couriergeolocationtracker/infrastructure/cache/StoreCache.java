@@ -7,7 +7,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
@@ -16,7 +16,7 @@ import java.util.List;
  * Data is loaded once the application is ready and does not change at runtime.
  */
 @Slf4j
-@Service
+@Component
 @Getter
 @RequiredArgsConstructor
 public class StoreCache {

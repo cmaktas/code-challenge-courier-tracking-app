@@ -8,6 +8,8 @@ import com.example.couriergeolocationtracker.service.consumer.observer.events.Co
 import com.example.couriergeolocationtracker.utils.HaversineDistanceCalculator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.event.EventListener;
+import org.springframework.stereotype.Component;
 import org.springframework.util.ObjectUtils;
 
 /**
@@ -15,13 +17,14 @@ import org.springframework.util.ObjectUtils;
  * after the Courier is confirmed in the database.
  */
 @Slf4j
+@Component
 @RequiredArgsConstructor
-public class DistanceObserver implements CourierEventObserver {
+public class DistanceObserver {
 
     private final CourierRepository courierRepository;
     private final CourierCacheService cacheService;
 
-    @Override
+    @EventListener
     public void onCourierEvent(CourierEvent event) {
         if (event instanceof CourierReadyEvent(Long courierId, double lat, double lng)) {
             log.debug("DistanceObserver triggered for courierId={}, lat={}, lng={}", courierId, lat, lng);

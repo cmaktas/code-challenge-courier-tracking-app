@@ -6,9 +6,10 @@ import com.example.couriergeolocationtracker.infrastructure.repository.CourierRe
 import com.example.couriergeolocationtracker.service.consumer.observer.events.CourierEvent;
 import com.example.couriergeolocationtracker.service.consumer.observer.events.CourierGeolocationEvent;
 import com.example.couriergeolocationtracker.service.consumer.observer.events.CourierReadyEvent;
-import com.example.couriergeolocationtracker.service.consumer.observer.publisher.CourierEventPublisher;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,24 +18,22 @@ import org.springframework.transaction.annotation.Transactional;
  * After successful DB operations, it publishes a {@link CourierReadyEvent}.
  */
 @Slf4j
-@RequiredArgsConstructor
 @Component
-public class CourierDatabaseObserver implements CourierEventObserver {
+@RequiredArgsConstructor
+public class CourierDatabaseObserver {
 
     private final CourierRepository courierRepository;
-    private final CourierEventPublisher eventPublisher;
+    private final ApplicationEventPublisher applicationEventPublisher;
 
-    @Override
     @Transactional
+    @EventListener
     public void onCourierEvent(CourierEvent event) {
         if (event instanceof CourierGeolocationEvent(CourierGeolocation geo)) {
             log.debug("CourierDatabaseObserver triggered for courierId={}", geo.getCourierId());
             Courier courier = findOrCreateCourier(geo.getCourierId());
-            eventPublisher.publishEvent(new CourierReadyEvent(
-                courier.getId(),
-                geo.getLat(),
-                geo.getLng()
-            ));
+            applicationEventPublisher.publishEvent(
+                    new CourierReadyEvent(courier.getId(), geo.getLat(), geo.getLng())
+            );
             log.debug("CourierReadyEvent published for courierId={}, lat={}, lng={}",
                 courier.getId(), geo.getLat(), geo.getLng());
         }

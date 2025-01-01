@@ -3,11 +3,11 @@ package com.example.couriergeolocationtracker.service.consumer;
 import com.example.couriergeolocationtracker.domain.constants.ActiveMQConstants;
 import com.example.couriergeolocationtracker.domain.dtos.CourierGeolocation;
 import com.example.couriergeolocationtracker.service.consumer.observer.events.CourierGeolocationEvent;
-import com.example.couriergeolocationtracker.service.consumer.observer.publisher.CourierEventPublisher;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Component;
 
@@ -21,7 +21,7 @@ import org.springframework.stereotype.Component;
 public class CourierGeolocationConsumer {
 
     private final ObjectMapper objectMapper;
-    private final CourierEventPublisher eventPublisher;
+    private final ApplicationEventPublisher applicationEventPublisher;
 
     /**
      * Consumes messages from the configured ActiveMQ queue, deserializes the JSON,
@@ -40,7 +40,7 @@ public class CourierGeolocationConsumer {
             throw new RuntimeException("Invalid CourierGeolocation JSON", e);
         }
 
-        eventPublisher.publishEvent(new CourierGeolocationEvent(geolocation));
+        applicationEventPublisher.publishEvent(new CourierGeolocationEvent(geolocation));
         log.debug("CourierGeolocationEvent published for courierId={}", geolocation.getCourierId());
     }
 }

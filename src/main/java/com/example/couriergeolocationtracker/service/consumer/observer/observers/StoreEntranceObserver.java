@@ -12,6 +12,7 @@ import com.example.couriergeolocationtracker.service.consumer.observer.events.Co
 import com.example.couriergeolocationtracker.utils.HaversineDistanceCalculator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
@@ -24,16 +25,16 @@ import java.util.List;
  * in the database. Also uses the lat/lng from {@link CourierReadyEvent}.
  */
 @Slf4j
-@RequiredArgsConstructor
 @Component
-public class StoreEntranceObserver implements CourierEventObserver {
+@RequiredArgsConstructor
+public class StoreEntranceObserver {
 
     private final CourierRepository courierRepository;
     private final StoreEntranceLogRepository storeEntranceLogRepository;
     private final CourierCacheService cacheService;
     private final StoreCache storeCache;
 
-    @Override
+    @EventListener
     @Transactional
     public void onCourierEvent(CourierEvent event) {
         if (event instanceof CourierReadyEvent(Long courierId, double lat, double lng)) {
